@@ -35,7 +35,7 @@ platform :ios do
     )
     pilot(
       ipa: 'ios/Rocket.Chat.ipa',
-      app_identifier: options[:official] ? 'chat.rocket.ios' : 'chat.rocket.reactnative',
+      app_identifier: options[:official] ? 'de.a6n.rocketchat' : 'de.a6n.rocketchat.experimental',
       skip_waiting_for_build_processing: true
     )
     upload_symbols_to_crashlytics(dsym_path: "./ios/Rocket.Chat.app.dSYM.zip")
@@ -55,8 +55,8 @@ platform :ios do
       in_house: false
     )
     match(type: "appstore")
-    get_provisioning_profile(app_identifier: "chat.rocket.reactnative.ShareExtension")
-    get_provisioning_profile(app_identifier: "chat.rocket.reactnative.NotificationService")
+    get_provisioning_profile(app_identifier: "de.a6n.rocketchat.experimental.ShareExtension")
+    get_provisioning_profile(app_identifier: "de.a6n.rocketchat.experimental.NotificationService")
     # pem(api_key: api_key) # still uses Spaceship http://docs.fastlane.tools/actions/pem/#how-does-it-work
     gym(
       scheme: "RocketChatRN",
@@ -71,20 +71,20 @@ platform :ios do
 
     match(
       type: "appstore",
-      app_identifier: ["chat.rocket.ios", "chat.rocket.ios.NotificationService", "chat.rocket.ios.Rocket-Chat-ShareExtension"],
+      app_identifier: ["de.a6n.rocketchat", "de.a6n.rocketchat.NotificationService", "de.a6n.rocketchat.Rocket-Chat-ShareExtension"],
       readonly: true,
       output_path: './'
     )
 
     update_code_signing_settings(
-      profile_name: "match AppStore chat.rocket.ios.NotificationService",
+      profile_name: "match AppStore de.a6n.rocketchat.NotificationService",
       build_configurations: "Release",
       code_sign_identity: "iPhone Distribution",
       targets: "NotificationService",
     )
 
     update_code_signing_settings(
-      profile_name: "match AppStore chat.rocket.ios.Rocket-Chat-ShareExtension",
+      profile_name: "match AppStore de.a6n.rocketchat.Rocket-Chat-ShareExtension",
       build_configurations: "Release",
       code_sign_identity: "iPhone Distribution",
       targets: "ShareRocketChatRN",

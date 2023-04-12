@@ -18,8 +18,8 @@ final class RocketChat {
   static var instances: [Server: RocketChat] = [:]
   var encryptionInstances: [RoomId: Encryption] = [:]
   
-  static private var queue = DispatchQueue(label: "chat.rocket.instanceQueue")
-  private var encryptionQueue = DispatchQueue(label: "chat.rocket.encryptionQueue")
+  static private var queue = DispatchQueue(label: "de.a6n.rocketchat.instanceQueue")
+  private var encryptionQueue = DispatchQueue(label: "de.a6n.rocketchat.encryptionQueue")
   
   init(server: Server) {
     self.server = server
