@@ -1568,7 +1568,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = de.a6n.rocketchat.experimental;
-				PRODUCT_NAME = "Rocket.Chat Experimental";
+				PRODUCT_NAME = "Planet.Chat Experimental";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RocketChatRN-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "RocketChatRN-Swift.h";
@@ -1624,7 +1624,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = de.a6n.rocketchat.experimental;
-				PRODUCT_NAME = "Rocket.Chat Experimental";
+				PRODUCT_NAME = "Planet.Chat Experimental";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RocketChatRN-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "RocketChatRN-Swift.h";
@@ -1890,7 +1890,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = de.a6n.rocketchat;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Planet.Chat;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RocketChatRN-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "RocketChatRN-Swift.h";
@@ -1944,7 +1944,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = de.a6n.rocketchat;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Planet.Chat;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RocketChatRN-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "RocketChatRN-Swift.h";
