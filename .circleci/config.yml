@@ -7,7 +7,7 @@ orbs:
 macos: &macos
   macos:
     xcode: "14.2.0"
-  resource_class: large
+  resource_class: macos.x86.medium.gen2
 
 bash-env: &bash-env
   BASH_ENV: "~/.nvm/nvm.sh"
@@ -119,12 +119,12 @@ commands:
             echo -e "VERSIONCODE=$CIRCLE_BUILD_NUM" >> ./gradle.properties
 
             if [[ $CIRCLE_JOB == "android-build-official" ]]; then
-              echo -e "APPLICATION_ID=chat.rocket.android" >> ./gradle.properties
+              echo -e "APPLICATION_ID=de.a6n.rocketchat" >> ./gradle.properties
               echo -e "BugsnagAPIKey=$BUGSNAG_KEY_OFFICIAL" >> ./gradle.properties
-              echo $KEYSTORE_OFFICIAL_BASE64 | base64 --decode > ./app/$KEYSTORE_OFFICIAL
-              echo -e "KEYSTORE=$KEYSTORE_OFFICIAL" >> ./gradle.properties
+              echo $KEYSTORE_OFFICIAL_BASE64 | base64 --decode > ./app/upload.keystore
+              echo -e "KEYSTORE=upload.keystore" >> ./gradle.properties
               echo -e "KEYSTORE_PASSWORD=$KEYSTORE_OFFICIAL_PASSWORD" >> ./gradle.properties
-              echo -e "KEY_ALIAS=$KEYSTORE_OFFICIAL_ALIAS" >> ./gradle.properties
+              echo -e "KEY_ALIAS=planetchat-upload" >> ./gradle.properties
               echo -e "KEY_PASSWORD=$KEYSTORE_OFFICIAL_PASSWORD" >> ./gradle.properties
             else
               echo -e "APPLICATION_ID=chat.rocket.reactnative" >> ./gradle.properties
@@ -141,7 +141,7 @@ commands:
           name: Set Google Services
           command: |
             if [[ $GOOGLE_SERVICES_ANDROID ]]; then
-              echo $GOOGLE_SERVICES_ANDROID | base64 --decode > google-services.json
+              echo $GOOGLE_SERVICES_ANDROID | base64 --decode | gunzip > google-services.json
             fi
           working_directory: android/app
 
@@ -151,7 +151,7 @@ commands:
             if [[ $CIRCLE_JOB == "android-build-official" ]]; then
               ./gradlew bundleOfficialPlayRelease
             fi
-            if [[ $CIRCLE_JOB == "android-build-experimental" || "android-automatic-build-experimental" ]]; then
+            if [[ $CIRCLE_JOB == "android-build-experimental" || $CIRCLE_JOB == "android-automatic-build-experimental" ]]; then
               ./gradlew bundleExperimentalPlayRelease
             fi
             if [[ ! $GOOGLE_SERVICES_ANDROID ]]; then
@@ -170,7 +170,7 @@ commands:
                 --source-map=android/app/build/generated/sourcemaps/react/officialPlay/release/app.bundle.map \
                 --bundle android/app/build/generated/assets/react/officialPlay/release/app.bundle
             fi
-            if [[ $CIRCLE_JOB == "android-build-experimental" || "android-automatic-build-experimental" ]]; then
+            if [[ $CIRCLE_JOB == "android-build-experimental" || $CIRCLE_JOB == "android-automatic-build-experimental" ]]; then
               npx bugsnag-source-maps upload-react-native \
                 --api-key=$BUGSNAG_KEY \
                 --app-version-code=$CIRCLE_BUILD_NUM \
@@ -266,7 +266,7 @@ commands:
           at: android
       - run:
           name: Store the google service account key
-          command: echo "$FASTLANE_GOOGLE_SERVICE_ACCOUNT" | base64 --decode > service_account.json
+          command: echo "$FASTLANE_GOOGLE_SERVICE_ACCOUNT" | base64 --decode | gunzip > service_account.json
           working_directory: android
       - run: *update-fastlane-android
       - run:
@@ -283,7 +283,7 @@ commands:
           at: android
       - run:
           name: Store the google service account key
-          command: echo "$FASTLANE_GOOGLE_SERVICE_ACCOUNT" | base64 --decode > service_account.json
+          command: echo "$FASTLANE_GOOGLE_SERVICE_ACCOUNT" | base64 --decode | gunzip > service_account.json
           working_directory: android
       - run: *update-fastlane-android
       - run:
@@ -301,7 +301,7 @@ commands:
           at: android
       - run:
           name: Store the google service account key
-          command: echo "$FASTLANE_GOOGLE_SERVICE_ACCOUNT" | base64 --decode > service_account.json
+          command: echo "$FASTLANE_GOOGLE_SERVICE_ACCOUNT" | base64 --decode | gunzip > service_account.json
           working_directory: android
       - run: *update-fastlane-android
       - run:
